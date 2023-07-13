@@ -17,15 +17,53 @@
 // Buon divertimento a tutte e a tutti!
 let dataOggi = new Date()
 let dataDomani = new Date (2023,6,14,9,30) 
-setInterval(refreshOra, 1000);
+ let countdown = setInterval(refreshOra, 1000);
 
 let orologio = document.getElementById("orario")
+let tempoMancanteOut = document.getElementById("tempo_mancante")
+
+
+dataOggi = new Date()
+orologio.innerHTML = dataOggi.getHours() + ":" + dataOggi.getMinutes() + ":" + dataOggi.getSeconds()
+
+
+
+
+
+// funzione set interval per orologio 
 function refreshOra() {
+    // richiamo costante per stabilire orario 
     dataOggi = new Date()
+    // stampo in pagina
     orologio.innerHTML = dataOggi.getHours() + ":" + dataOggi.getMinutes() + ":" + dataOggi.getSeconds()
-    // console.log(getHours() + getMinutes() + getSeconds());
+ 
+
 }
 
+// creo funzione per fare countdownn 
+let countDown = setInterval (function(){
+    // richiamo funzione per data odierna 
+dataOggi = new Date()
+orologio.innerHTML = dataOggi.getHours() + ":" + dataOggi.getMinutes() + ":" + dataOggi.getSeconds()
+// creo variabili per calcorare countdown 
+let differenzaMs = (dataDomani - dataOggi);//differenza tra giorni in millisecondi
+let differenzaHr = Math.floor((differenzaMs  % 86400000) / 3600000); // ore
+let differenzaMin = Math.round(((differenzaMs % 86400000) % 3600000) / 60000); // minuti
+let differenzaSc = Math.floor((((differenzaMs % 86400000)%3600000) % 60000) /1000); // secondi
+
+// stampo countDown in pagina 
+ tempoMancanteOut.innerHTML = differenzaHr + " ore, " + differenzaMin + " minuti, " + differenzaSc + "secondi, "
+//  creo condizione in modo che allo scadere del tempo faccio compare un alert alla fine del countdownm 
+if (differenzaMs < 0) {
+    alert("Buona lezione")
+
+    clearInterval(countDown)
+}
+},500)
+   
+  
+  
 
 
+    
 
