@@ -16,8 +16,8 @@
 // Esistono dei metodi per trasformare una data in millisecondi?
 // Buon divertimento a tutte e a tutti!
 let dataOggi = new Date()
-let dataDomani = new Date (2023,6,14,9,30) 
- let countdown = setInterval(refreshOra, 1000);
+let dataDomani = new Date(2023, 6, 14, 17, 26)
+let countdown = setInterval(refreshOra, 1000);
 
 let orologio = document.getElementById("orario")
 let tempoMancanteOut = document.getElementById("tempo_mancante")
@@ -25,7 +25,9 @@ let tempoMancanteOut = document.getElementById("tempo_mancante")
 
 dataOggi = new Date()
 orologio.innerHTML = dataOggi.getHours() + ":" + dataOggi.getMinutes() + ":" + dataOggi.getSeconds()
+if (dataDomani < 0) {
 
+}
 
 
 
@@ -36,34 +38,39 @@ function refreshOra() {
     dataOggi = new Date()
     // stampo in pagina
     orologio.innerHTML = dataOggi.getHours() + ":" + dataOggi.getMinutes() + ":" + dataOggi.getSeconds()
- 
+
 
 }
 
 // creo funzione per fare countdownn 
-let countDown = setInterval (function(){
+let countDown = setInterval(function () {
     // richiamo funzione per data odierna 
-dataOggi = new Date()
-orologio.innerHTML = dataOggi.getHours() + ":" + dataOggi.getMinutes() + ":" + dataOggi.getSeconds()
-// creo variabili per calcorare countdown 
-let differenzaMs = (dataDomani - dataOggi);//differenza tra giorni in millisecondi
-let differenzaHr = Math.floor((differenzaMs  % 86400000) / 3600000); // ore
-let differenzaMin = Math.round(((differenzaMs % 86400000) % 3600000) / 60000); // minuti
-let differenzaSc = Math.floor((((differenzaMs % 86400000)%3600000) % 60000) /1000); // secondi
+    dataOggi = new Date()
+    orologio.innerHTML = dataOggi.getHours() + ":" + dataOggi.getMinutes() + ":" + dataOggi.getSeconds()
+    // creo variabili per calcorare countdown 
+    let differenzaMs = (dataDomani - dataOggi);//differenza tra giorni in millisecondi
+    let differenzaHr = Math.floor((differenzaMs % 86400000) / 3600000); // ore
+    let differenzaMin = Math.round(((differenzaMs % 86400000) % 3600000) / 60000); // minuti
+    let differenzaSc = Math.floor((((differenzaMs % 86400000) % 3600000) % 60000) / 1000); // secondi
 
-// stampo countDown in pagina 
- tempoMancanteOut.innerHTML = differenzaHr + " ore, " + differenzaMin + " minuti, " + differenzaSc + "secondi, "
-//  creo condizione in modo che allo scadere del tempo faccio compare un alert alla fine del countdownm 
-if (differenzaMs < 0) {
-    alert("Buona lezione")
+    // stampo countDown in pagina 
+    tempoMancanteOut.innerHTML = differenzaHr + " ore, " + differenzaMin + " minuti, " + differenzaSc + "secondi, "
+    //  creo condizione in modo che allo scadere del tempo faccio compare un alert alla fine del countdownm 
+    if (differenzaMs < 0) {
+        differenzaSc = 0
+        differenzaMin = 0
+        differenzaHr = 0
+        clearInterval(countDown,)
+        tempoMancanteOut.innerHTML = differenzaHr + " ore, " + differenzaMin + " minuti, " + differenzaSc + "secondi, "
+        alert("Buona lezione")
+    }
 
-    clearInterval(countDown)
-}
-},500)
-   
-  
-  
+
+}, 500)
 
 
-    
+
+
+
+
 
